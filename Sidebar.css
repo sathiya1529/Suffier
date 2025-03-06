@@ -1,0 +1,334 @@
+.sidebar {
+    height: 100vh;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+  
+  .sidebar.expanded {
+    width: 250px;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px; /* Width for icon-only mode */
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 60px;
+  }
+  
+  .sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  
+  .sidebar-toggle {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+  }
+  
+  .sidebar.collapsed .sidebar-toggle {
+    margin: 0 auto;
+  }
+  
+  .sidebar-toggle:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .toggle-icon {
+    font-size: 1.2rem;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-item {
+    margin-bottom: 2px;
+  }
+  
+  .menu-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+  }
+  
+  .sidebar.collapsed .menu-link {
+    justify-content: center;
+    padding: 15px 0;
+  }
+  
+  .menu-link:hover {
+    background-color: #e9ecef;
+    border-left: 3px solid #007bff;
+  }
+  
+  .menu-link.active {
+    background-color: #e9ecef;
+    border-left: 3px solid #007bff;
+    color: #007bff;
+  }
+  
+  .menu-icon {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+  }
+  
+  .sidebar.collapsed .menu-icon {
+    margin-right: 0;
+  }
+  
+  .menu-text {
+    flex: 1;
+  }
+  
+  .arrow-icon {
+    font-size: 12px;
+    transition: transform 0.3s;
+  }
+  
+  .arrow-icon.rotate {
+    transform: rotate(90deg);
+  }
+  
+  .submenu {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .submenu.open {
+    max-height: 500px;
+  }
+  
+  .submenu-item {
+    margin-top: 1px;
+  }
+  
+  .submenu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px 10px 45px;
+    color: #495057;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+  }
+  
+  .submenu-link:hover {
+    background-color: #e9ecef;
+    border-left: 3px solid #6c757d;
+    color: #007bff;
+  }
+  
+  .submenu-link.active {
+    background-color: #e9ecef;
+    border-left: 3px solid #6c757d;
+    color: #007bff;
+  }
+  
+  .submenu-text {
+    flex: 1;
+  }
+  
+  .nested-submenu {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .nested-submenu.open {
+    max-height: 500px;
+  }
+  
+  .nested-submenu-item {
+    margin-top: 1px;
+  }
+  
+  .nested-submenu-link {
+    display: block;
+    padding: 8px 20px 8px 65px;
+    color: #6c757d;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+  }
+  
+  .nested-submenu-link:hover {
+    background-color: #f8f9fa;
+    border-left: 3px solid #adb5bd;
+    color: #007bff;
+  }
+  
+  .content-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s;
+  }
+  
+  /* Tooltip for icon-only mode */
+  .sidebar.collapsed .menu-link {
+    position: relative;
+  }
+  
+  .sidebar.collapsed .menu-link:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1002;
+    font-weight: normal;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .sidebar.expanded {
+      width: 250px;
+    }
+    
+    .sidebar.collapsed {
+      width: 0;
+      transform: translateX(-100%);
+    }
+    
+    body {
+      padding-left: 0;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    body {
+      transition: padding-left 0.3s ease;
+    }
+    
+    body.sidebar-expanded {
+      padding-left: 250px;
+    }
+    
+    body.sidebar-collapsed {
+      padding-left: 60px;
+    }
+  }
+  
+  /* Add beautiful animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .menu-item {
+    animation: fadeIn 0.3s forwards;
+    animation-delay: calc(0.05s * var(--index, 0));
+  }
+  
+  .menu-item:nth-child(1) {
+    --index: 1;
+  }
+  
+  .menu-item:nth-child(2) {
+    --index: 2;
+  }
+  
+  .menu-item:nth-child(3) {
+    --index: 3;
+  }
+  
+  /* Add tooltip data attributes for icon-only mode */
+  .sidebar.collapsed .menu-link[data-title]:hover::after {
+    content: attr(data-title);
+  }
+  
+  /* For dark mode compatibility */
+  body.dark-mode .sidebar {
+    background-color: #333;
+    color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  body.dark-mode .sidebar-logo {
+    color: #4dabf7;
+  }
+  
+  body.dark-mode .menu-link {
+    color: #e9ecef;
+  }
+  
+  body.dark-mode .menu-link:hover,
+  body.dark-mode .menu-link.active {
+    background-color: #444;
+    border-left: 3px solid #4dabf7;
+  }
+  
+  body.dark-mode .submenu-link:hover,
+  body.dark-mode .submenu-link.active,
+  body.dark-mode .nested-submenu-link:hover {
+    background-color: #444;
+    color: #4dabf7;
+  }
+  
+  body.dark-mode .sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
